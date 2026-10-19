@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotion Reader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<main>
+  <h1>What does this sentence feel like?</h1>
+  <p class="sub">Write anything. A BiGRU model reads it and tells you which of six emotions it carries.</p>
+
+  <section class="card">
+    <textarea id="input" maxlength="2000" rows="4" placeholder="I can't believe they remembered my birthday…" aria-label="Text to analyze"></textarea>
+    <div class="row">
+      <span class="count"><b id="count">0</b> / 2000</span>
+      <button id="go" disabled><span class="label">Analyze emotion</span><span class="spin"></span></button>
+    </div>
+    <div class="chips" id="chips">
+      <button type="button">I feel so happy and excited</button>
+      <button type="button">I miss her so much it hurts</button>
+      <button type="button">How dare you lie to me again</button>
+      <button type="button">I'm terrified of what's behind that door</button>
+      <button type="button">Wow, I never saw that coming</button>
+    </div>
+  </section>
+
+  <p class="error" id="error" role="alert" hidden></p>
+
+  <section class="result" id="result" hidden aria-live="polite">
+    <div class="hero">
+      <div class="ring">
+        <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="arc" id="arc" cx="60" cy="60" r="52"/></svg>
+        <span class="emoji" id="emoji"></span>
+      </div>
+      <div>
+        <h2 id="emotion"></h2>
+        <p class="conf"><b id="conf">0</b>% confident</p>
+      </div>
+    </div>
+    <p class="hint" id="hint" hidden></p>
+    <ul class="bars" id="bars"></ul>
+  </section>
+
+  <section class="history" id="history" hidden>
+    <h3>Recent</h3>
+    <ul id="hist"></ul>
+  </section>
+</main>
+
+<footer>Powered by FastAPI &amp; TensorFlow</footer>
+<script src="/static/script.js"></script>
+</body>
+</html>
